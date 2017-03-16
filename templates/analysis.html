@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+   <head>
+        <link rel = "stylesheet" type = "text/css" href = "{{ url_for('static',filename='styles/accountInfo.css') }}">
+        <link rel = "stylesheet" type = "text/css" href = "{{ url_for('static',filename='styles/main.css') }}">
+        <script type = "text/javascript" src = "https://www.google.com/jsapi"></script>
+        <script type = "text/javascript">
+        {% block body %}
+
+        google.load('visualization', '1', {packages: ['corechart', 'bar']});
+        google.setOnLoadCallback(loadCharts);
+
+        function loadCharts()
+        {
+            usageChart();
+            typesChart();
+        }
+
+        function usageChart()
+        {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Types');
+            data.addColumn('number', 'Size (MB)');
+            data.addRow(['Used (MB)', {{ used }}]);
+            data.addRow(['Free (MB)', {{ free }}]);
+
+            var options =
+            {
+                title: 'Space usage',
+                slices: {0 : { color: 'silver' }, 1 : { color: 'gold' }}
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('spaceUsage'));
+            chart.draw(data, options);
+        }
+
+        function typesChart()
+        {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Types');
+            data.addColumn('number', 'Total Size (KB)');
+            data.addColumn({type:'string', role:'style'});
+
+            {% for size, color, type in rows %}
+                data.addRow(['{{ type }}', {{ size }}, 'color: {{ color }}']);
+            {% endfor %}
+
+            var options =
+            {
+                title: 'Usage by file types',
+                hAxis: { title: 'Size (KB)', minValue: 0 },
+                vAxis: { title: 'File Types' }
+            };
+
+            var chart = new google.visualization.BarChart(document.getElementById('fileTypes'));
+            chart.draw(data, options);
+        }
+
+        {% endblock %}
+        </script>
+   </head>
+   <body>
+      <div id = "spaceUsage" style = "width:700px; height:350px; margin-left: 30%;"></div>
+      <div id = "fileTypes" style = "width:700px; height:300px; margin-left: 30%;"></div>
+      <div class = "formStyle">
+        <form action = "http://localhost:5000/account" method = "GET">
+            <input type = "submit" value = "Back" class = "buttonNormal" title = "Go back" />
+            <input type = "submit" value = "Logout" name = "logout" class = "buttonLogout" title = "Logout" />
+        </form>
+      </div>
+   </body>
+</html>

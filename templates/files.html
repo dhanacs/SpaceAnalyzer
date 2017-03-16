@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+   <head>
+       <link rel = "stylesheet" type = "text/css" href = "{{ url_for('static',filename='styles/accountInfo.css') }}">
+       <link rel = "stylesheet" type = "text/css" href = "{{ url_for('static',filename='styles/main.css') }}">
+   </head>
+   <body>
+      <table>
+        <caption>Files List</caption>
+        <thead>
+            <tr>
+                <th>Name</th><th>Type</th><th>Size (KB)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for type, size, name in data %}
+                <tr>
+                    <td>{{ name }}</td>
+                    {% if type == "File" %}
+                        <td><img src="{{ url_for('static',filename = 'file.png') }}" alt = "File" title = "File"></img></td>
+                    {% else %}
+                        <td><img src="{{ url_for('static',filename = 'folder.png') }}" alt = "Folder" title = "Folder"></img></td>
+                    {% endif %}
+                    <td>{{ size }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      {% if data|length == 0 %}
+        <div class="noFiles">Sorry, no files to show!</div>
+      {% endif %}
+      <div class="formStyle">
+        <form action = "http://localhost:5000/account" method = "GET">
+            <input type = "submit" value = "Back" class = "buttonNormal" title = "Go back" />
+            <input type = "submit" value = "Logout" name = "logout" class = "buttonLogout" title = "Logout" />
+        </form>
+      </div>
+   </body>
+</html>
