@@ -1,1 +1,1 @@
-gunicorn main:app -b localhost:5000
+web: gunicorn -b 0.0.0.0:$PORT main:app
