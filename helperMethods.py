@@ -8,7 +8,7 @@ from dropbox.client import DropboxClient
 # Run a Breadth First Search
 # Collect all file and folder meta data starting from the root
 def BFS(client, contents, names, types, sizes, paths):
-    Q = Queue()
+    Q = Queue.Queue()
 
     # Push all the items in root into queue
     for content in contents:
