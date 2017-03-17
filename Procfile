@@ -1,1 +1,1 @@
-gunicorn --bind 0.0.0.0:5000 wsgi:app
+gunicorn main:app -b localhost:5000
