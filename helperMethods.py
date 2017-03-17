@@ -1,5 +1,5 @@
 import os
-import queue
+import Queue
 import random
 import string
 from flask import session
