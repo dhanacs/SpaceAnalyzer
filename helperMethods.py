@@ -1,9 +1,8 @@
 import os
+import queue
 import random
-from queue import *
-from random import choice
+import string
 from flask import session
-from string import ascii_uppercase
 from dropbox.client import DropboxClient
 
 # Run a Breadth First Search
