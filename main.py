@@ -2,10 +2,8 @@ import os
 from dropbox.client import DropboxClient, DropboxOAuth2FlowNoRedirect
 from flask import Flask, render_template, request, session, redirect, url_for
 
-from SpaceAnalyzer import helperMethods
-from SpaceAnalyzer import sqlMethods
-from helperMethods import BFS, spaceUsage, getFileTypeSizes, getColors, getSecretKey
-from sqlMethods import saveToDB, retrieveFromDB, searchInDB
+import helperMethods
+import sqlMethods
 
 app = Flask(__name__)
 
