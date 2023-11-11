@@ -1,4 +1,6 @@
-## Project Setup Instructions
+## Overview
+The Dropbox Storage Analyzer is a Python web application crafted to provide in-depth analysis of storage usage within a Dropbox account.
+Offering a user-friendly interface, this application presents insightful charts, a comprehensive listing of files, and other visual aids to offer a clear understanding of the space utilization in the associated Dropbox account.
 
 ## Tools and Languages Used
 
